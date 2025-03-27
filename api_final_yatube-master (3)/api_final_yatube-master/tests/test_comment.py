@@ -158,8 +158,6 @@ class TestCommentAPI:
             '`/api/v1/posts/{post.id}/comments/` для полей `author` и `post` '
             'установлен свойство "Только для чтения"'
         )
-
-
     def test_comments_id_available(self, user_client, post, comment_1_post):
         response = user_client.get(
             f'/api/v1/posts/{post.id}/comments/{comment_1_post.id}/'
@@ -168,7 +166,6 @@ class TestCommentAPI:
             'Страница `/api/v1/posts/{post.id}/comments/{comment.id}/` '
             'не найдена, проверьте этот адрес в *urls.py*.'
         )
-
     def test_comments_id_unauth_get(self, client, post, comment_1_post):
         response = client.get(
             f'/api/v1/posts/{post.id}/comments/{comment_1_post.id}/'
@@ -178,7 +175,6 @@ class TestCommentAPI:
             '`/api/v1/posts/{post.id}/comments/{comment.id}/` возвращает '
             'ответ со статусом 401.'
         )
-
     def test_comment_id_auth_get(self, user_client, post,
                                  comment_1_post, user):
         response = user_client.get(
@@ -188,7 +184,6 @@ class TestCommentAPI:
             'Страница `/api/v1/posts/{post.id}/comments/{comment.id}/` не '
             'найдена, проверьте этот адрес в *urls.py*.'
         )
-
         test_data = response.json()
         assert test_data.get('text') == comment_1_post.text, (
             'Проверьте, что для авторизованного пользователя GET-запрос к '
